@@ -1,21 +1,21 @@
 <?php
-include('config.php');
-if(isset($_POST)){
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $message = $_POST["message"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $subjek = $_POST['subjek'];
+    $pesan = $_POST['pesan'];
     
-    $to = "tegar0726@smk.belajar.id"; // Ganti dengan alamat email tujuan Anda
-    $subject = "Pesan dari formulir kontak";
-    $body = "Nama: $name\nEmail: $email\n\nPesan:\n$message";
+    // Alamat email tujuan
+    $tujuan = "endzflypnix@gmail.com";
     
-    // Kirim email
-    if (mail($to, $subject, $body)) {
-        echo "Pesan Anda telah berhasil dikirim.";
-    } else {
-        echo "Maaf, terjadi kesalahan dalam mengirim pesan.";
-    }
-} else {
-    echo "Akses ditolak.";
+    // Membangun pesan email
+    $pesan_email = "Nama: $nama\n";
+    $pesan_email .= "Email: $email\n";
+    $pesan_email .= "Pesan:\n$pesan\n";
+    
+    // Mengirim email
+    mail($tujuan, $subjek, $pesan_email);
+    
+    echo "Pesan telah terkirim.";
 }
 ?>
